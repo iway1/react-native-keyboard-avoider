@@ -6,7 +6,7 @@ A modern, developer friendly React Native keyboard avoiding solution that actual
 ## Features
 - Consistent cross platform behavior by default
 - More responsive scroll view
-    - Section based scrolling (makes sure entire section is visible when keyboard shows instead of just input)
+    - Section based scrolling (show entire section when keyboard visible)
 - Adjustable animations
 - Works out of the box with any layout
 - Compatible with Expo
