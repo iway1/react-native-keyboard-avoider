@@ -112,12 +112,14 @@ Well, now we do
 Our `KeyboardAvoiderView` will work in all of these situations, and it's never going to break your layout. It's just a view that gets out of the way of the keyboard in a predictable way. You can choose whether it avoids to the bottom of the view or to the focused text input, and it will make sure you get that behavior on both platforms. 
 
 ## Comparison with react-native-keyboard-aware-scroll-view
-This library has several advantages over the popular package `react-native-keyboard-aware-scroll-view`:
+This library has several advantages over the popular package `react-native-keyboard-aware-scroll-view`.
 
 ### better user experience
 More responsive behavior on iOS. `react-native-keyboard-aware-scroll-view` doesn't scroll fast enough to avoid the keyboard:
 
-And it behaves inconsistently:
+And it can act janky in certain circumstances:
+
+Our `<KeyboardAvoiderScrollView/>` does exactly what it should in all situations on iOS, it just gets the input out of the way with a smooth animation:
 
 ### Consistent keyboard avoiding within your application
 Keyboard avoiding will look the same both within and outside of scroll views:
