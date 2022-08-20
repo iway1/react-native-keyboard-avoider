@@ -8,7 +8,7 @@ A modern, developer friendly React Native keyboard avoiding solution that actual
 - More responsive scroll view
     - Section based scrolling (show entire section when keyboard visible)
 - Adjustable animations
-- Works out of the box with any layout
+- Works with any layout
 - Compatible with Expo
 - Avoids pitfalls of similar libraries that lead to bad DX and bad UX. 
     - Comparison with React Native's [KeyboardAvoidingView](#comparison-with-keyboardavoidingview)
