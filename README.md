@@ -58,7 +58,7 @@ It wont break the rest of your layout, it's easy to understand, it just works.
 
 ### 2. `KeyboardAvoiderScrollView`
 A more responsive keyboard aware `ScrollView` that behaves predictably:
-```tsx
+```jsx
 export const MyScreen = () => (
   <KeyboardAvoiderScrollView contentContainerStyle={{flexGrow: 1}}>
     <View style={{flex: 1}}/>
@@ -70,7 +70,7 @@ export const MyScreen = () => (
 #### Section based scrolling
 Optionally, you can create a section based scroll with the `KeyboardAvoiderScrollSection` component:
 
-```tsx
+```jsx
 export const MyScreen = () => (
   <KeyboardAvoiderScrollView contentContainerStyle={{flexGrow: 1}}>
 
@@ -87,7 +87,7 @@ This makes it where the entire section will by shown when any input within that 
 
 ### 3. `KeyboardAvoiderInsets`
 A component that creates keyboard avoiding insets. 
-```tsx
+```jsx
 export const MyScreen = () => (
   <KeyboardAvoiderScrollView contentContainerStyle={{flexGrow: 1}}>
     <View style={{flex: 1}}/>
