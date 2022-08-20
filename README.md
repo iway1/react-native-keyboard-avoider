@@ -1,4 +1,4 @@
-![alt text](promo.png)
+![alt text](promo-image.png)
 
 # Keyboard Avoiding (finally) made easy.
 A modern, developer friendly React Native keyboard avoiding solution that actually works all of the time and provides consistency across platforms. Provides a high quality user experience out of the box.
