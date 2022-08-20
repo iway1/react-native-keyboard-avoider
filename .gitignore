@@ -62,4 +62,4 @@ buck-out/
 /ios/Pods/
 /vendor/bundle/
 
-.vscode
+.vscode/
