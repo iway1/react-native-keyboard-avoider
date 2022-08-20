@@ -1,3 +1,5 @@
+![alt text](promo.png)
+
 # Keyboard Avoiding (finally) made easy.
 A modern, developer friendly React Native keyboard avoiding solution that actually works all of the time and provides consistency across platforms. Provides a high quality user experience out of the box.
 
@@ -29,7 +31,7 @@ cd ios && pod install
 ## Usage
 First, you need to wrap your app in `KeyboardAvoiderProvider`:
 
-```tsx
+```jsx
 export const App = () => (
   <KeyboardAvoiderProvider>
     <RestOfApp/>
@@ -42,7 +44,7 @@ This library has three primary components that make implementing keyboard avoidi
 ### 1. `KeyboardAvoiderView`
 A view that simply gets out of the way of the keyboard regardless of what the rest of your screen and layout looks like:
 
-```tsx
+```jsx
 export const MyScreen = () => (
   <View style={{flex: 1}}>
     <View style={{flex: 1}}/>
