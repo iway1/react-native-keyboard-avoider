@@ -2,7 +2,7 @@
   "name": "@good-react-native/keyboard-avoider",
   "version": "1.0.6",
   "description": "A package for *easily* creating the keyboard avoiding behavior your want.",
-  "main": "index.ts",
+  "main": "index.ts", 
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "p": "npm version patch --force && npm publish --access public"
