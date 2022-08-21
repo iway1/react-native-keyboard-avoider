@@ -9,12 +9,12 @@ A modern, developer friendly React Native keyboard avoiding solution that actual
 - Consistent cross platform behavior by default
 - More responsive scroll view
     - Section based scrolling (show entire section when keyboard visible)
-- Works with any layout
-- Switch between "avoid entire view" and "show focused text input" behavior
+- Multiple behaviors that work with *any* layout
 - Compatible with Expo
 - Avoids pitfalls of similar libraries that lead to bad DX and bad UX. 
     - Comparison with React Native's [KeyboardAvoidingView](#comparison-with-keyboardavoidingview)
     - Comparison with [react-native-keyboard-aware-scroll-view](#comparison-with-react-native-keyboard-aware-scroll-view)
+
 
 
 ## Installation
@@ -23,27 +23,18 @@ This library requires `react-native-gesture-handler` and `react-native-reanimate
 To install:
 
 ```sh
-yarn add @iway1/react-native-keyboard-avoider react-native-gesture-handler react-native-reanimated 
+yarn add @good-react-native/keyboard-avoider react-native-gesture-handler react-native-reanimated 
 ```
 
+### iOS
 Install cocoapods: 
 ```sh
 cd ios && pod install
 ```
 
-## Usage
-First, you need to wrap your app in `KeyboardAvoiderProvider`:
-
-```jsx
-export const App = () => (
-  <KeyboardAvoiderProvider>
-    <RestOfApp/>
-  </KeyboardAvoiderProvider>
-);
-```
 
 ### Android
-Make sure your Android keyboard avoiding behavior is set to `adjustPan`. If you're in a bare workflow, add this line to your `android/app/src/main/AndroidManifest.xml`:
+Make sure your Android keyboard avoiding behavior is set to `adjustPan` (this library assumes it is). If you're in a bare workflow, add this line to your `android/app/src/main/AndroidManifest.xml`:
 ```xml
 <activity
     android:windowSoftInputMode="adjustPan"
@@ -59,6 +50,18 @@ If you're using Expo instead of a bare workflow, you will instead add this to `a
     }
   }
 ```
+
+## Usage
+First, you need to wrap your app in `KeyboardAvoiderProvider`:
+
+```jsx
+export const App = () => (
+  <KeyboardAvoiderProvider>
+    <RestOfApp/>
+  </KeyboardAvoiderProvider>
+);
+```
+
 
 ## Components
 This library has three primary components that make implementing keyboard avoiding behavior easy. 
@@ -111,6 +114,7 @@ export const MyScreen = () => (
 ```
 
 This makes it where the entire section will by shown when any input within that section is focused:
+
 ![](gifs/keyboard-avoider/section-scrolling.gif)
 
 ### 3. `KeyboardAvoiderInsets`
@@ -213,6 +217,7 @@ If you do need to alter the layout itself, then you can use our [KeyboardAvoider
 Unlike `<KeyboardAvoidingView/>` `behavior` prop, `<KeyboardAvoiderView/>` `avoidMode` doesn't make you think about implementation details. Instead, it simply tells the `<KeyboardAvoiderView/>` where you would like it to move when the keyboard shows.
 
 ## Comparison with react-native-keyboard-aware-scroll-view
+
 Part of the motivation for creating this library was to attempt to create a scroll view that fixed many of the issues found in `react-native-keyboard-aware-scroll-view`.
 
 ### Better user experience

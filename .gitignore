@@ -62,6 +62,7 @@ buck-out/
 /ios/Pods/
 /vendor/bundle/
 
+# Dev
 .vscode/
-
 push
+.npmrc

@@ -1,6 +1,7 @@
 {
-  "name": "react-native-good-keyboard-avoiding",
-  "version": "1.0.0",
+  "name": "@good-react-native/keyboard-avoider",
+  
+  "version": "1.0.1",
   "description": "A package for *easily* creating the keyboard avoiding behavior your want.",
   "main": "index.js",
   "scripts": {
@@ -16,7 +17,8 @@
     "react",
     "native",
     "react",
-    "good"
+    "good",
+    "scrollview"
   ],
   "author": "Isaac Way",
   "license": "MIT",
