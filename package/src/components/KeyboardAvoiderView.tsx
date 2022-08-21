@@ -18,7 +18,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import { DEFAULT_ANIMATION_TIME, DEFAULT_EXTRA_SPACE } from '../defaults'
 import { useKeyboardHandlers } from '../hooks'
-import { measureFocusedInputBottomY } from '../utilities'
+import { closeAnimation, measureFocusedInputBottomY, openAnimation } from '../utilities'
 
 export type KeyboardAvoidMode = 'whole-view' | 'focused-input';
 
@@ -30,7 +30,7 @@ export default function KeyboardAvoiderView({
     ...props
 }: ComponentProps<typeof Animated.View> & {
     /**
-     * Enable on android. Defaults to true to ensure consistent behavior. If the avoidMode prop is 'focused-input' this prop does nothing.
+     * Enable on android. Defaults to true to ensure consistent behavior.
      */
     enableAndroid?: boolean,
     /**
@@ -57,11 +57,12 @@ export default function KeyboardAvoiderView({
         keyboardTopRef.current = e.endCoordinates.screenY
         
         if (Platform.OS == 'android') {
-            if (avoidMode == 'focused-input') return;
-            const focusedInput = TextInput.State.currentlyFocusedInput();
-            if (!focusedInput) return;
             measureFocusedInputBottomY((inputBottomY) => {
                 const pannedBy = Math.max(inputBottomY - e.endCoordinates.screenY, 0);
+                if(avoidMode=='focused-input') {
+                    setScrollToElementBottomY(inputBottomY-pannedBy)
+                    return;
+                }
                 ref.current?.measure((x, y, w, viewHeight, px, viewPageY) => {
                     setScrollToElementBottomY(
                         viewPageY + viewHeight + animation.value - pannedBy,
@@ -98,19 +99,13 @@ export default function KeyboardAvoiderView({
 
     useEffect(() => {
         if (scrollToElementBottomY === null) {
-            animation.value = withTiming(0, {
-                duration: animationTime,
-                easing: Easing.inOut(Easing.ease),
-            })
+            animation.value = withTiming(0, closeAnimation(animationTime))
             return
         }
         const p = pos(scrollToElementBottomY);
         if (p <= 0) return
         if (animation.value !== p) {
-            animation.value = withTiming(p, {
-                duration: animationTime,
-                easing: Easing.in(Easing.ease),
-            })
+            animation.value = withTiming(p, openAnimation(animationTime))
         }
     }, [scrollToElementBottomY])
 

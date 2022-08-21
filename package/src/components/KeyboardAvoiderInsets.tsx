@@ -4,7 +4,7 @@ import { Platform } from "react-native";
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 import { DEFAULT_ANIMATION_TIME, DEFAULT_EXTRA_SPACE } from "../defaults";
 import { useKeyboardHandlers } from "../hooks";
-import { calcAndroidSystemPan, measureFocusedInputBottomY } from "../utilities";
+import { calcAndroidSystemPan, closeAnimation, measureFocusedInputBottomY, openAnimation } from "../utilities";
 
 export default function KeyboardAvoiderInsets({
     animationTime = DEFAULT_ANIMATION_TIME,
@@ -39,10 +39,7 @@ export default function KeyboardAvoiderInsets({
                     animatedRef.current?.measure((x, y, width, height, pageX, pageY) => {
                         const delta = Math.max(0, (pageY + extraSpace) - e.endCoordinates.screenY - systemPan);
                         if (delta) {
-                            heightAnimatedValue.value = withTiming(delta, {
-                                duration: animationTime,
-                                easing: Easing.in(Easing.ease)
-                            })
+                            heightAnimatedValue.value = withTiming(delta, openAnimation(animationTime))
                         }
                     })
                 })
@@ -50,19 +47,14 @@ export default function KeyboardAvoiderInsets({
                 animatedRef.current?.measure((x, y, width, height, pageX, pageY) => {
                     const delta = Math.max(0, (pageY + extraSpace) - e.endCoordinates.screenY);
                     if (delta) {
-                        heightAnimatedValue.value = withTiming(delta, {
-                            duration: animationTime,
-                            easing: Easing.in(Easing.ease)
-                        })
+                        heightAnimatedValue.value = withTiming(delta, openAnimation(animationTime))
                     }
                 })
             }
 
         },
         hideHandler: () => {
-            heightAnimatedValue.value = withTiming(0, {
-                duration: animationTime,
-            })
+            heightAnimatedValue.value = withTiming(0, closeAnimation(animationTime))
         }
     })
 
