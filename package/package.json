@@ -1,0 +1,39 @@
+{
+  "name": "@good-react-native/keyboard-avoider",
+  "version": "uses tag name in github action",
+  "description": "A package for *easily* creating the keyboard avoiding behavior your want.",
+  "main": "index.ts", 
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "p": "npm version patch --force && npm publish --access public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iway1/react-native-good-keyboard-avoiding.git"
+  },
+  "keywords": [
+    "keyboard",
+    "avoiding",
+    "react",
+    "native",
+    "react",
+    "good",
+    "scrollview"
+  ],
+  "author": "Isaac Way",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iway1/react-native-good-keyboard-avoiding/issues"
+  },
+  "homepage": "https://github.com/iway1/react-native-good-keyboard-avoiding#readme",
+  "peerDependencies": {
+    "react": "^17.0.0",
+    "react-native": "^0.62.0",
+    "react-native-reanimated": "^2.0.0",
+    "react-native-uuid": "^2.0.1"
+  },
+  "dependencies": {
+    "@types/react-native": "^0.69.5",
+    "react-native-uuid": "^2.0.1"
+  }
+}

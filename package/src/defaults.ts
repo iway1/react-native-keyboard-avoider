@@ -1,0 +1,2 @@
+export const DEFAULT_EXTRA_SPACE = 20
+export const DEFAULT_ANIMATION_TIME = 150
