@@ -1,4 +1,9 @@
 {
   "name": "GoodKeyboardAvoiding",
-  "displayName": "GoodKeyboardAvoiding"
+  "displayName": "GoodKeyboardAvoiding",
+  "expo": {
+    "android": {
+      "softwareKeyboardLayoutMode": "pan"
+    }
+  }
 }

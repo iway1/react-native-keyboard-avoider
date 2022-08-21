@@ -17,11 +17,6 @@ interface Props extends ScrollViewProps {
      * Defaults to 20.
      */
     extraSpace?: number,
-    /**
-     * If true, the scroll view will scroll when the keyboard closes on android by the system pan amount.
-     * This attempts to mimic the iOS behavior. Defaults to true.
-     */
-    androidScrollOnClose?: boolean,
 
     /**
      * Duration of the keyboard avoiding animation.
@@ -44,11 +39,8 @@ async function measureView(view: View) {
     })
 }
 
-var i = 0;
-
 export default function KeyboardAvoiderScrollView({
     extraSpace = DEFAULT_EXTRA_SPACE,
-    androidScrollOnClose = false,
     animationTime=DEFAULT_ANIMATION_TIME,
     iosHideBehavior='stay',
     ...props
@@ -104,7 +96,6 @@ export default function KeyboardAvoiderScrollView({
 
             for (var sectionMeasure of sectionViewMeasures) {
                 if (inputMeasure <= sectionMeasure.bottom && inputMeasure >= sectionMeasure.top) {
-                    console.log("Scrolling to section, bottom: ", sectionMeasure.bottom, inputMeasure)
                     scrollToKeyboard(sectionMeasure.bottom, e.endCoordinates.screenY, inputMeasure)
                     return;
                 }
@@ -112,8 +103,9 @@ export default function KeyboardAvoiderScrollView({
             scrollToKeyboard(inputMeasure, e.endCoordinates.screenY, inputMeasure)
         })()
     }
+
     function handleKeyboardWillHide() {
-        if(Platform.OS == 'android' || iosHideBehavior == 'revert'){
+        if(Platform.OS == 'android' || iosHideBehavior == 'revert') {
             yTranslate.value = withTiming(0, closeAnimation(animationTime))
             return;
         }
@@ -153,7 +145,6 @@ export default function KeyboardAvoiderScrollView({
             <ScrollView
                 ref={scrollviewRef}
                 scrollEventThrottle={1}
-                keyboardDismissMode='on-drag'
                 {...props}
                 onScroll={(e: NativeSyntheticEvent<NativeScrollEvent>) => {
                     if (props.onScroll) props.onScroll(e);
@@ -166,21 +157,6 @@ export default function KeyboardAvoiderScrollView({
                     style={[yTranslateStyle, { flex: 1, }]}
                 >
                     {props.children}
-                    {/* {!!bottomInset &&
-                        <Animated.View
-                            style={{
-                                height: bottomInset
-                            }}
-                            onLayout={() => {
-                                // scrolling is deferred until this spacer view renders
-                                if (!spacerHasLayout.current) {
-                                    scrollviewRef.current?.scrollToEnd();
-                                    spacerHasLayout.current = true;
-                                }
-                            }}
-                            layout={Layout.duration(150)}
-                        />
-                    } */}
                 </Animated.View>
             </ScrollView>
         </ScrollContext.Provider>

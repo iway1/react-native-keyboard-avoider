@@ -3,6 +3,8 @@
 # Keyboard Avoiding (finally) made easy.
 A modern, developer friendly React Native keyboard avoiding solution that actually works all of the time and provides consistency across platforms. Provides a high quality user experience out of the box.
 
+[API Reference](#api)
+
 ## Features
 - Consistent cross platform behavior by default
 - More responsive scroll view
@@ -13,6 +15,7 @@ A modern, developer friendly React Native keyboard avoiding solution that actual
 - Avoids pitfalls of similar libraries that lead to bad DX and bad UX. 
     - Comparison with React Native's [KeyboardAvoidingView](#comparison-with-keyboardavoidingview)
     - Comparison with [react-native-keyboard-aware-scroll-view](#comparison-with-react-native-keyboard-aware-scroll-view)
+
 
 ## Installation
 This library requires `react-native-gesture-handler` and `react-native-reanimated`.
@@ -39,6 +42,25 @@ export const App = () => (
 );
 ```
 
+### Android
+Make sure your Android keyboard avoiding behavior is set to `adjustPan`. If you're in a bare workflow, add this line to your `android/app/src/main/AndroidManifest.xml`:
+```xml
+<activity
+    android:windowSoftInputMode="adjustPan"
+>
+```
+
+If you're using Expo instead of a bare workflow, you will instead add this to `app.json`
+
+```json
+  "expo": {
+    "android": {
+      "softwareKeyboardLayoutMode": "pan"
+    }
+  }
+```
+
+## Components
 This library has three primary components that make implementing keyboard avoiding behavior easy. 
 
 ### 1. `KeyboardAvoiderView`
@@ -56,6 +78,8 @@ export const MyScreen = () => (
 ```
 It wont break the rest of your layout, it's easy to understand, it just works.
 
+[KeyboardAvoiderView API](#keyboardavoiderview-props)
+
 ### 2. `KeyboardAvoiderScrollView`
 A more responsive keyboard aware `ScrollView` that behaves predictably:
 ```jsx
@@ -67,8 +91,11 @@ export const MyScreen = () => (
 );
 ```
 
-#### Section based scrolling
+[KeyboardAvoiderScrollView API](#keyboardavoiderscrollview-props)
+
+### Section based scrolling
 Optionally, you can create a section based scroll with the `KeyboardAvoiderScrollSection` component:
+
 
 ```jsx
 export const MyScreen = () => (
@@ -83,7 +110,8 @@ export const MyScreen = () => (
 );
 ```
 
-This makes it where the entire section will by shown when any input within that section is focused.
+This makes it where the entire section will by shown when any input within that section is focused:
+![](gifs/keyboard-avoider/section-scrolling.gif)
 
 ### 3. `KeyboardAvoiderInsets`
 A component that creates keyboard avoiding insets. 
@@ -96,7 +124,11 @@ export const MyScreen = () => (
 );
 ```
 
-You can use this when you need some space to be created within a layout when the keyboard shows (like if you had a keyboard attached to the bottom of the screen.)
+You can use this when you need some space to be created within a layout when the keyboard shows (like if you had a keyboard attached to the bottom of the screen):
+
+![](gifs/keyboard-avoider/insets.gif)
+
+[KeyboardAvoiderInsets API](#keyboardavoiderinsets-props)
 
 ## Comparison with KeyboardAvoidingView
 The biggest issue with the React Native's `KeyboardAvoidingView` is that, as a developer, it's hard to reason about how the behaviors will end up functioning within a screen and doesn't work in all layouts (even when it should work probably work). For example, lets look at a very simple layout:
@@ -173,20 +205,18 @@ export function ReactNativeFixedExample() {
 
 ![](gifs/keyboard-avoider/isgood.gif)
 
-Oh, look, it actually works. 
-
 Our `KeyboardAvoiderView` will work in every situation, and it's never going to break your layout because it uses translations instead of animating properties that affect your layout such as height and padding. It's just a view that gets out of the way of the keyboard in a predictable way.
 
-If you do need to alter the layout, then you can use our `KeyboardAvoiderInsets` for all such use cases.
+If you do need to alter the layout itself, then you can use our [KeyboardAvoiderInsets](#3-keyboardavoiderinsets) for all such use cases.
 
 ### No "behavior" prop
 Unlike `<KeyboardAvoidingView/>` `behavior` prop, `<KeyboardAvoiderView/>` `avoidMode` doesn't make you think about implementation details. Instead, it simply tells the `<KeyboardAvoiderView/>` where you would like it to move when the keyboard shows.
 
 ## Comparison with react-native-keyboard-aware-scroll-view
-This library has several advantages over the popular package `react-native-keyboard-aware-scroll-view`.
+Part of the motivation for creating this library was to attempt to create a scroll view that fixed many of the issues found in `react-native-keyboard-aware-scroll-view`.
 
-### better user experience
-More responsive behavior on. `react-native-keyboard-aware-scroll-view` doesn't scroll fast enough to avoid the keyboard:
+### Better user experience
+More responsive behavior. `react-native-keyboard-aware-scroll-view` doesn't scroll fast enough to avoid the keyboard:
 
 ![](gifs/keyboard-aware-scroll-view/keyboard-hides-input.gif)
 
@@ -208,9 +238,9 @@ No "bounce glitch". Unfortunately, this is a glitch that has existed for years i
 
 There is simply no way to reliably avoid the "bounce" if you're using `@react-navigation` (although you may be able to avoid it in some cases, it probably can't be solved for all).
 
-React Native's KeyboardAvoidingView has issues with this as well. Our library avoids any such issues by measuring the absolute position of elements on the screen.
+React Native's KeyboardAvoidingView has been reported to have issues with this as well. Our library avoids any such issues by measuring the absolute position of elements on the screen.
 
-### section based scrolling 
+### Section based scrolling 
 This library allows for automatic scrolling to show entire views instead of only allowing scrolling to text inputs if the developer wants it. This feature can be used to create a better user experience if desired:
 
 ![](gifs/keyboard-avoider/section-scrolling.gif)
@@ -224,3 +254,33 @@ One noteable default difference is that on iOS, `<KeyboardAvoiderScrollView/>` w
 If this library is missing some feature that you'd find valueable, please open an issue! We're hoping the community can help guide us in deciding which features to add next to this package and are very open to suggestions at the moment. And we would like to avoid adding any features that we aren't sure have value to developers.
 
 For developer convenience, this repo is a React Native project. You can just pull it down and work within the project. Pull requests should only touch the `src` folder.
+
+# API
+
+## Props
+
+### `KeyboardAvoiderView` Props
+All `View` props will be passed. Additionally, the following props can be passed:
+
+| **Prop**      | **Type**                        | **Description**                                                                                                                                            | **Default**  |
+|---------------|---------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
+| animationTime | number                          | Time to move the view out of the way when the keyboard opens.                                                                                              | 150          |
+| avoidMode     | 'whole-view'<br>'focused-input' | Which avoid mode to use. <br>'whole-view' will move the entire `KeyboardAvoidingView` out of the way.<br>'focused-input' will only show the focused input. | 'whole-view' |
+| enableAndroid | boolean                         | Enable keyboard avoiding on android.                                                                                                                       | true         |
+| extraSpace    | number                          | How much space there should be between the keyboard avoiding element and the keyboard.                                                                     | 20           |
+
+### `KeyboardAvoiderScrollView` Props
+All `ScrollView` props can be passed. Additionally, the following props can be passed:
+
+| **Props**       | **Type**           | **Description**                                                                                                                                                                                            | **Default** |
+|-----------------|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
+| extraSpace      | number             | How much space there should be between the keyboard avoiding element and the keyboard.                                                                                                                     | 20          |
+| animationTime   | number             | Time to move the view out of the way when the keyboard opens.                                                                                                                                              | 150         |
+| iosHideBehavior | 'stay'<br>'revert' | What to do when the keyboard hides on iOS.<br>'stay' makes it where the scrollview stays where it is when the keyboard closes.<br>'revert' makes it where the scrollview returns to its original position. | 'stay'      |
+
+### `KeyboardAvoiderInsets` Props
+
+| **Props**     | **Type** | **Description**                                                                        | **Default** |
+|---------------|----------|----------------------------------------------------------------------------------------|-------------|
+| extraSpace    | number   | How much space there should be between the keyboard avoiding element and the keyboard. | 20          |
+| animationTime | number   | Time to move the view out of the way when the keyboard opens.                          | 150         |

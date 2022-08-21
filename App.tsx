@@ -8,6 +8,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import KeyboardAvoiderScrollSection from './package/src/components/KeyboardAvoiderScrollSection';
 import { ScrollView } from 'react-native-gesture-handler';
 import ReactNativeExample, { ReactNativeFixedExample } from './examples/react-native';
+import { textInputStyle } from './examples/styles';
 
 const inputStyle: ViewStyle = {
   padding: 50,
@@ -109,7 +110,7 @@ function TestKeyboardAvoidingScrollView() {
   )
 }
 
-function TestPaddingView() {
+function TestInsets() {
   return (
     <View
       style={{ flex: 1, justifyContent: 'flex-start' }}
@@ -119,25 +120,24 @@ function TestPaddingView() {
           position: 'absolute',
           bottom: 0,
           left: 0,
-          right: 0
+          right: 0,
+          paddingTop: 16,
+          borderTopWidth: StyleSheet.hairlineWidth,
+          borderTopColor: 'lightblue'
         }}
       >
-        <TextInput style={inputStyle} />
+        <Text
+          style={{marginBottom: 16}}
+        >
+          A slide up input
+        </Text>
+        <TextInput style={textInputStyle} />
         <KeyboardAvoiderInsets />
       </View>
     </View>
 
   )
 }
-// Breaks:
-// __iOS__
-// 1. when keyboard opens in extra height area (bottom of input <-> bottom of input + extra height)
-// 2. weird scroll behavior to extra height (uses scroll + insets)
-// 3. with react-navigation header
-// 4. janky reset behavior
-
-// Disadvantages:
-// 1. Less responsive 
 
 function TestCompetition() {
   const appHeight = useAppHeight().appHeight;
@@ -174,7 +174,7 @@ type Test = keyof typeof testComponents;
 const testComponents = {
   'KeyboardAvoiderView': TestKeyboardAvoidingView,
   'KeyboardAvoiderScrollView': TestKeyboardAvoidingScrollView,
-  'KeyboardAvoiderInsets': TestPaddingView,
+  'KeyboardAvoiderInsets': TestInsets,
   'react-native-keyboard-aware-scrollview': TestCompetition,
   'README Example #1: React Native': ReactNativeExample,
   'README Example #1: Fixed': ReactNativeFixedExample

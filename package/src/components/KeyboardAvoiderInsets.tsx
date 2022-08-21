@@ -1,7 +1,7 @@
 import React from "react";
 import { useRef } from "react";
 import { Platform } from "react-native";
-import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 import { DEFAULT_ANIMATION_TIME, DEFAULT_EXTRA_SPACE } from "../defaults";
 import { useKeyboardHandlers } from "../hooks";
 import { calcAndroidSystemPan, closeAnimation, measureFocusedInputBottomY, openAnimation } from "../utilities";
