@@ -14,16 +14,29 @@ A modern, developer friendly React Native keyboard avoiding solution that actual
 - Avoids pitfalls of similar libraries that lead to bad DX and bad UX. 
     - Comparison with React Native's [KeyboardAvoidingView](#comparison-with-keyboardavoidingview)
     - Comparison with [react-native-keyboard-aware-scroll-view](#comparison-with-react-native-keyboard-aware-scroll-view)
-
-
+- Written in pure TypeScript
 
 ## Installation
-This library requires `react-native-gesture-handler` and `react-native-reanimated`.
+This library requires `react-native-reanimated`.
 
 To install:
 
 ```sh
-yarn add @good-react-native/keyboard-avoider react-native-gesture-handler react-native-reanimated 
+yarn add @good-react-native/keyboard-avoider react-native-reanimated 
+```
+
+If you aren't using Expo, make sure to add the `react-native-reanimated` Babel Plugin to `babel.config.js`:
+
+```js
+module.exports = {
+    presets: [
+      ...
+    ],
+    plugins: [
+      ...
+      'react-native-reanimated/plugin',
+    ],
+};
 ```
 
 ### iOS
@@ -31,7 +44,6 @@ Install cocoapods:
 ```sh
 cd ios && pod install
 ```
-
 
 ### Android
 Make sure your Android keyboard avoiding behavior is set to `adjustPan` (this library assumes it is). If you're in a bare workflow, add this line to your `android/app/src/main/AndroidManifest.xml`:

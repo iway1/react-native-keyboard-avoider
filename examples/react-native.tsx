@@ -1,6 +1,5 @@
 import React from "react";
-import { Dimensions, Image, KeyboardAvoidingView, View } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
+import { Dimensions, Image, KeyboardAvoidingView, View, TextInput } from "react-native";
 import KeyboardAvoiderView from "../package/src/components/KeyboardAvoiderView";
 import { textInputStyle } from "./styles";
 

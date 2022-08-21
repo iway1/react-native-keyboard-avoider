@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Text, TextInput, View, ViewStyle, TouchableOpacity, SafeAreaView, StyleSheet } from 'react-native';
+import { Text, TextInput, View, ViewStyle, TouchableOpacity, SafeAreaView, StyleSheet, ScrollView } from 'react-native';
 import KeyboardAvoiderView, { KeyboardAvoidMode } from './package/src/components/KeyboardAvoiderView';
 import KeyboardAvoiderScrollView from './package/src/components/KeyboardAvoiderScrollView';
 import KeyboardAvoiderProvider, { useAppHeight } from './package/src/components/KeyboardAvoiderProvider';
 import KeyboardAvoiderInsets from './package/src/components/KeyboardAvoiderInsets';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import KeyboardAvoiderScrollSection from './package/src/components/KeyboardAvoiderScrollSection';
-import { ScrollView } from 'react-native-gesture-handler';
 import ReactNativeExample, { ReactNativeFixedExample } from './examples/react-native';
 import { textInputStyle } from './examples/styles';
 

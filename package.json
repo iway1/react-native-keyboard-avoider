@@ -13,7 +13,6 @@
     "@gorhom/portal": "^1.0.14",
     "react": "18.0.0",
     "react-native": "0.69.4",
-    "react-native-gesture-handler": "^2.5.0",
     "react-native-reanimated": "^2.9.1",
     "react-native-uuid": "^2.0.1"
   },

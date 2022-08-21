@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useMemo, useRef, useState } from "react";
-import { KeyboardEventListener, NativeScrollEvent, NativeSyntheticEvent, Platform, ScrollViewProps, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { KeyboardEventListener, NativeScrollEvent, NativeSyntheticEvent, Platform, ScrollViewProps, View, ScrollView } from "react-native";
 import Animated, { Easing, Layout, scrollTo, useAnimatedRef, useAnimatedStyle, useDerivedValue, useSharedValue, withTiming } from "react-native-reanimated";
 import { DEFAULT_ANIMATION_TIME, DEFAULT_EXTRA_SPACE } from "../defaults";
 import { useKeyboardHandlers } from "../hooks";
