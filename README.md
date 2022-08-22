@@ -241,7 +241,7 @@ And it can act janky in certain circumstances:
 
 ![](gifs/keyboard-aware-scroll-view/jank-1.gif)
 
-Our `<KeyboardAvoiderScrollView/>` does exactly what it should in all situations on iOS, it just gets the input out of the way with a smooth animation:
+Our `<KeyboardAvoiderScrollView/>` does exactly what it should in all situations, it just gets the input out of the way with a smooth animation:
 
 ![](gifs/keyboard-avoider/scrollview.gif)
 
