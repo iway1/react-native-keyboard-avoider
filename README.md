@@ -1,7 +1,7 @@
 ![alt text](promo-image.png)
 
 # Keyboard Avoiding (finally) made easy.
-A modern, developer friendly React Native keyboard avoiding solution that actually works all of the time and provides consistency across platforms. Provides a high quality user experience out of the box.
+A modern, developer friendly React Native keyboard avoiding solution that actually works how it is supposed too all of the time and provides consistency across platforms. Provides a higher quality user experience and developer experience out of the box.
 
 [API Reference](#api)
 
@@ -241,7 +241,7 @@ And it can act janky in certain circumstances:
 
 ![](gifs/keyboard-aware-scroll-view/jank-1.gif)
 
-Our `<KeyboardAvoiderScrollView/>` does exactly what it should in all situations on iOS, it just gets the input out of the way with a smooth animation:
+Our `<KeyboardAvoiderScrollView/>` does exactly what it should in all situations, it just gets the input out of the way with a smooth animation:
 
 ![](gifs/keyboard-avoider/scrollview.gif)
 
