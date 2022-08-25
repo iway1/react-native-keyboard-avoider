@@ -5,13 +5,10 @@ import React, {
     useState,
 } from 'react'
 import {
-    Keyboard,
     KeyboardEventListener,
     Platform,
-    TextInput,
 } from 'react-native'
 import Animated, {
-    Easing,
     useAnimatedStyle,
     useSharedValue,
     withTiming,
