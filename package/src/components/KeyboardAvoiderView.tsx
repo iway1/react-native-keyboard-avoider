@@ -13,31 +13,24 @@ import Animated, {
     useSharedValue,
     withTiming,
 } from 'react-native-reanimated'
-import { DEFAULT_ANIMATION_TIME, DEFAULT_EXTRA_SPACE } from '../defaults'
 import { useKeyboardHandlers } from '../hooks'
 import { closeAnimation, measureFocusedInputBottomY, openAnimation } from '../utilities'
+import { CommonProps, defaultCommonProps } from './common-props'
 
 export type KeyboardAvoidMode = 'whole-view' | 'focused-input';
 
 export default function KeyboardAvoiderView({
+    animationEasing = defaultCommonProps.animationEasing,
+    animationTime = defaultCommonProps.animationTime,
+    extraSpace = defaultCommonProps.extraSpace,
     enableAndroid = true,
-    animationTime = DEFAULT_ANIMATION_TIME,
-    extraSpace = DEFAULT_EXTRA_SPACE,
     avoidMode = 'whole-view',
     ...props
-}: ComponentProps<typeof Animated.View> & {
+}: ComponentProps<typeof Animated.View> & CommonProps & {
     /**
      * Enable on android. Defaults to true to ensure consistent behavior.
      */
     enableAndroid?: boolean,
-    /**
-     * Sets the duration of the keyboard avoiding animation.
-     */
-    animationTime?: number,
-    /**
-     * Extra space between the keyboard avoiding element and the keyboard.
-     */
-    extraSpace?: number,
     /**
      * Sets the avoid mode. Defaults to 'whole-view'.
      * @option 'whole-view' - view moves to show the entire view when the keyboard is shown.
@@ -52,12 +45,12 @@ export default function KeyboardAvoiderView({
 
     const handleKeyboardWillShow: KeyboardEventListener = (e) => {
         keyboardTopRef.current = e.endCoordinates.screenY
-        
+
         if (Platform.OS == 'android') {
             measureFocusedInputBottomY((inputBottomY) => {
                 const pannedBy = Math.max(inputBottomY - e.endCoordinates.screenY, 0);
-                if(avoidMode=='focused-input') {
-                    setScrollToElementBottomY(inputBottomY-pannedBy)
+                if (avoidMode == 'focused-input') {
+                    setScrollToElementBottomY(inputBottomY - pannedBy)
                     return;
                 }
                 ref.current?.measure((x, y, w, viewHeight, px, viewPageY) => {
@@ -79,7 +72,7 @@ export default function KeyboardAvoiderView({
             })
         }
     }
-    
+
     function handleKeyboardWillHide() {
         setScrollToElementBottomY(null)
     }
@@ -91,18 +84,18 @@ export default function KeyboardAvoiderView({
     }, [avoidMode, extraSpace, animationTime])
 
     function pos(scrollTo: number) {
-        return scrollTo - keyboardTopRef.current + DEFAULT_EXTRA_SPACE
+        return scrollTo - keyboardTopRef.current + extraSpace
     }
 
     useEffect(() => {
         if (scrollToElementBottomY === null) {
-            animation.value = withTiming(0, closeAnimation(animationTime))
+            animation.value = withTiming(0, closeAnimation(animationTime, animationEasing))
             return
         }
         const p = pos(scrollToElementBottomY);
         if (p <= 0) return
         if (animation.value !== p) {
-            animation.value = withTiming(p, openAnimation(animationTime))
+            animation.value = withTiming(p, openAnimation(animationTime, animationEasing))
         }
     }, [scrollToElementBottomY])
 

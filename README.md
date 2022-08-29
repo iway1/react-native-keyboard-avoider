@@ -276,28 +276,34 @@ For developer convenience, this repo is a React Native project. You can just pul
 
 ## Props
 
-### `KeyboardAvoiderView` Props
-All `View` props will be passed. Additionally, the following props can be passed:
+### Common props
+All of the components support the following props:
 
-| **Prop**      | **Type**                        | **Description**                                                                                                                                            | **Default**  |
-|---------------|---------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
-| animationTime | number                          | Time to move the view out of the way when the keyboard opens.                                                                                              | 150          |
-| avoidMode     | 'whole-view'<br>'focused-input' | Which avoid mode to use. <br>'whole-view' will move the entire `KeyboardAvoidingView` out of the way.<br>'focused-input' will only show the focused input. | 'whole-view' |
-| enableAndroid | boolean                         | Enable keyboard avoiding on android.                                                                                                                       | true         |
-| extraSpace    | number                          | How much space there should be between the keyboard avoiding element and the keyboard.                                                                     | 20           |
+| **Props**       | **Type**                | **Description**                                                                                                                                                                               | **Default** |
+|-----------------|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
+| animationTime   | number                  | Time to move the view out of the way when the keyboard opens.                                                                                                                                 | 150         |
+| animationEasing | Animated.EasingFunction | Easing function to use for both opening and closing animation.<br>Opening animation will use `Easing.out(animationEasing)`, while closing animation<br>will use `Easing.in(animationEasing)`. | Easing.quad |
+| extraSpace      | number                  | How much space there should be between the keyboard avoiding element and the keyboard.                                                                                                        | 20          |
+
+### `KeyboardAvoiderView` Props
+Supports all React Native `View` props as well as all [common props](#common-keyboardavoider-props).
+
+Additionally, it supports the following props
+
+| **Props**     | **Type**                        | **Description**                                                                                                                                                     | **Default**  |
+|---------------|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
+| avoidMode     | 'whole-view'<br>'focused-input' | Which avoid mode to use.<br>'whole-view' will move the entire view out of the way.<br>'focused-input' will move just enough to show the input plus the extra space. | 'whole-view' |
+| enableAndroid | boolean                         | Enable keyboard avoiding on Android.                                                                                                                                | true         |
+
 
 ### `KeyboardAvoiderScrollView` Props
-All `ScrollView` props can be passed. Additionally, the following props can be passed:
+Supports all React Native `ScrollView` props as well as all [common props](#common-keyboardavoider-props).
+
+Additionally, it supports the following props
 
 | **Props**       | **Type**           | **Description**                                                                                                                                                                                            | **Default** |
 |-----------------|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
-| extraSpace      | number             | How much space there should be between the keyboard avoiding element and the keyboard.                                                                                                                     | 20          |
-| animationTime   | number             | Time to move the view out of the way when the keyboard opens.                                                                                                                                              | 150         |
-| iosHideBehavior | 'stay'<br>'revert' | What to do when the keyboard hides on iOS.<br>'stay' makes it where the scrollview stays where it is when the keyboard closes.<br>'revert' makes it where the scrollview returns to its original position. | 'stay'      |
+| iosHideBehavior | 'stay'<br>'revert' | Behavior when the keyboard hides on iOS.<br>'stay' makes it where the scroll view stays where it is when the keyboard closes.<br>'revert' makes it where the scroll view returns to its original position. | 'stay'      |
 
 ### `KeyboardAvoiderInsets` Props
-
-| **Props**     | **Type** | **Description**                                                                        | **Default** |
-|---------------|----------|----------------------------------------------------------------------------------------|-------------|
-| extraSpace    | number   | How much space there should be between the keyboard avoiding element and the keyboard. | 20          |
-| animationTime | number   | Time to move the view out of the way when the keyboard opens.                          | 150         |
+Supports all [common props](#common-keyboardavoider-props).

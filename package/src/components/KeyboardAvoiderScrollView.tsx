@@ -1,27 +1,16 @@
 import React, { createContext, useContext, useMemo, useRef, useState } from "react";
 import { KeyboardEventListener, NativeScrollEvent, NativeSyntheticEvent, Platform, ScrollViewProps, View, ScrollView } from "react-native";
-import Animated, { Easing, Layout, scrollTo, useAnimatedRef, useAnimatedStyle, useDerivedValue, useSharedValue, withTiming } from "react-native-reanimated";
-import { DEFAULT_ANIMATION_TIME, DEFAULT_EXTRA_SPACE } from "../defaults";
+import Animated, {  scrollTo, useAnimatedRef, useAnimatedStyle, useDerivedValue, useSharedValue, withTiming } from "react-native-reanimated";
 import { useKeyboardHandlers } from "../hooks";
 import { closeAnimation, measureFocusedInputBottomYAsync } from "../utilities";
+import { CommonProps, defaultCommonProps } from "./common-props";
 
 const ScrollContext = createContext<{ 
     registerView: ({view, id,}:{view: View, id: string}) => void,
     unregisterView: (id: string)=>void,
 } | null>(null);
 
-interface Props extends ScrollViewProps {
-    /**
-     * Extra space between the keyboard and the keyboard avoiding element.
-     * Defaults to 20.
-     */
-    extraSpace?: number,
-
-    /**
-     * Duration of the keyboard avoiding animation.
-     */
-    animationTime?: number,
-
+type Props = ScrollViewProps & CommonProps & {
     /**
      * What to do when the keyboard hides on iOS.
      * @option 'stay' - *Default* scroll view will not move when the keyboard hides (it will stay where it is.)
@@ -39,8 +28,9 @@ async function measureView(view: View) {
 }
 
 export default function KeyboardAvoiderScrollView({
-    extraSpace = DEFAULT_EXTRA_SPACE,
-    animationTime=DEFAULT_ANIMATION_TIME,
+    animationEasing=defaultCommonProps.animationEasing,
+    animationTime=defaultCommonProps.animationTime,
+    extraSpace=defaultCommonProps.extraSpace,
     iosHideBehavior='stay',
     ...props
 }: Props) {
@@ -105,7 +95,7 @@ export default function KeyboardAvoiderScrollView({
 
     function handleKeyboardWillHide() {
         if(Platform.OS == 'android' || iosHideBehavior == 'revert') {
-            yTranslate.value = withTiming(0, closeAnimation(animationTime))
+            yTranslate.value = withTiming(0, closeAnimation(animationTime, animationEasing))
             return;
         }
         const scrollsToAdjustedForTranslate = currentScroll.current - yTranslate.value;
@@ -114,7 +104,7 @@ export default function KeyboardAvoiderScrollView({
         if(scrollsToAdjustedForTranslate >= scrollMax.current) {
             // In cases where there is no room to actually scroll the scroll view we just animate back to the
             // start position.
-            yTranslate.value = withTiming(0, closeAnimation(animationTime))
+            yTranslate.value = withTiming(0, closeAnimation(animationTime, animationEasing))
             return;
         }
         

@@ -1,5 +1,5 @@
 import { TextInput } from "react-native"
-import { Easing } from "react-native-reanimated";
+import Animated, { Easing } from "react-native-reanimated";
 
 export async function measureFocusedInputBottomYAsync() {
     return new Promise<number>(resolve=>{
@@ -36,16 +36,16 @@ export function calcAndroidSystemPan({
     return Math.max(0, delta);
 }
 
-export function closeAnimation(duration: number) {
+export function closeAnimation(duration: number, easing: Animated.EasingFunction) {
     return {
         duration: duration + 50,
-        easing: Easing.in(Easing.ease)
+        easing: Easing.in(easing)
     }
 }
 
-export function openAnimation(duration: number) {
+export function openAnimation(duration: number, easing: Animated.EasingFunction) {
     return {
         duration,
-        easing: Easing.inOut(Easing.ease)
+        easing: Easing.out(easing)
     }
 }
