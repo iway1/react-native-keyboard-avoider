@@ -1,24 +1,16 @@
 import React from "react";
 import { useRef } from "react";
 import { Platform } from "react-native";
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
-import { DEFAULT_ANIMATION_TIME, DEFAULT_EXTRA_SPACE } from "../defaults";
+import Animated, { EasingFn, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 import { useKeyboardHandlers } from "../hooks";
 import { calcAndroidSystemPan, closeAnimation, measureFocusedInputBottomY, openAnimation } from "../utilities";
+import { CommonProps, defaultCommonProps } from "./common-props";
 
 export default function KeyboardAvoiderInsets({
-    animationTime = DEFAULT_ANIMATION_TIME,
-    extraSpace = DEFAULT_EXTRA_SPACE,
-}: {
-    /**
-     * Duration of the keyboard avoiding animation.
-     */
-    animationTime?: number,
-    /**
-     * Extra space between the keyboard avoiding element and the keyboard.
-     */
-    extraSpace?: number,
-}) {
+    animationEasing=defaultCommonProps.animationEasing,
+    animationTime=defaultCommonProps.animationTime,
+    extraSpace=defaultCommonProps.extraSpace
+}:CommonProps) {
     const heightAnimatedValue = useSharedValue<number>(0);
     const animatedRef = useRef<Animated.View | null>(null);
 
@@ -31,7 +23,7 @@ export default function KeyboardAvoiderInsets({
     useKeyboardHandlers({
         showHandler: (e) => {
             if (Platform.OS == 'android') {
-                measureFocusedInputBottomY((inputBottomY)=>{
+                measureFocusedInputBottomY((inputBottomY) => {
                     const systemPan = calcAndroidSystemPan({
                         inputBottomY,
                         keyboardEndY: e.endCoordinates.screenY,
@@ -39,7 +31,10 @@ export default function KeyboardAvoiderInsets({
                     animatedRef.current?.measure((x, y, width, height, pageX, pageY) => {
                         const delta = Math.max(0, (pageY + extraSpace) - e.endCoordinates.screenY - systemPan);
                         if (delta) {
-                            heightAnimatedValue.value = withTiming(delta, openAnimation(animationTime))
+                            heightAnimatedValue.value = withTiming(delta, {
+                                easing: animationEasing,
+                                duration: animationTime
+                            })
                         }
                     })
                 })
@@ -47,14 +42,14 @@ export default function KeyboardAvoiderInsets({
                 animatedRef.current?.measure((x, y, width, height, pageX, pageY) => {
                     const delta = Math.max(0, (pageY + extraSpace) - e.endCoordinates.screenY);
                     if (delta) {
-                        heightAnimatedValue.value = withTiming(delta, openAnimation(animationTime))
+                        heightAnimatedValue.value = withTiming(delta, openAnimation(animationTime, animationEasing))
                     }
                 })
             }
 
         },
         hideHandler: () => {
-            heightAnimatedValue.value = withTiming(0, closeAnimation(animationTime))
+            heightAnimatedValue.value = withTiming(0, closeAnimation(animationTime, animationEasing))
         }
     })
 

@@ -8,6 +8,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import KeyboardAvoiderScrollSection from './package/src/components/KeyboardAvoiderScrollSection';
 import ReactNativeExample, { ReactNativeFixedExample } from './examples/react-native';
 import { textInputStyle } from './examples/styles';
+import { Easing } from 'react-native-reanimated';
 
 const inputStyle: ViewStyle = {
   padding: 50,

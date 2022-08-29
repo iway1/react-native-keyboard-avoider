@@ -1,2 +1,2 @@
-export const DEFAULT_EXTRA_SPACE = 20
-export const DEFAULT_ANIMATION_TIME = 150
+import { Easing } from "react-native-reanimated"
+
