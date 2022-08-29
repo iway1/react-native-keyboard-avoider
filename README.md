@@ -286,7 +286,7 @@ All of the components support the following props:
 | extraSpace      | number                  | How much space there should be between the keyboard avoiding element and the keyboard.                                                                                                        | 20          |
 
 ### `KeyboardAvoiderView` Props
-Supports all React Native `View` props as well as all [common props](#common-keyboardavoider-props).
+Supports all React Native `View` props as well as all [common props](#common-props).
 
 Additionally, it supports the following props
 
@@ -297,7 +297,7 @@ Additionally, it supports the following props
 
 
 ### `KeyboardAvoiderScrollView` Props
-Supports all React Native `ScrollView` props as well as all [common props](#common-keyboardavoider-props).
+Supports all React Native `ScrollView` props as well as all [common props](#common-props).
 
 Additionally, it supports the following props
 
@@ -306,4 +306,4 @@ Additionally, it supports the following props
 | iosHideBehavior | 'stay'<br>'revert' | Behavior when the keyboard hides on iOS.<br>'stay' makes it where the scroll view stays where it is when the keyboard closes.<br>'revert' makes it where the scroll view returns to its original position. | 'stay'      |
 
 ### `KeyboardAvoiderInsets` Props
-Supports all [common props](#common-keyboardavoider-props).
+Supports all [common props](#common-props).
