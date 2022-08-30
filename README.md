@@ -279,11 +279,11 @@ For developer convenience, this repo is a React Native project. You can just pul
 ### Common props
 All of the components support the following props:
 
-| **Props**       | **Type**                | **Description**                                                                                                                                                                               | **Default** |
-|-----------------|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
-| animationTime   | number                  | Time to move the view out of the way when the keyboard opens.                                                                                                                                 | 150         |
-| animationEasing | Animated.EasingFunction | Easing function to use for both opening and closing animation.<br>Opening animation will use `Easing.out(animationEasing)`, while closing animation<br>will use `Easing.in(animationEasing)`. | Easing.quad |
-| extraSpace      | number                  | How much space there should be between the keyboard avoiding element and the keyboard.                                                                                                        | 20          |
+| **Props**       | **Type**                | **Description**                                                                                                                               | **Default** |
+|-----------------|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|-------------|
+| animationTime   | number                  | Time to move the view out of the way when the keyboard opens.                                                                                 | 150         |
+| animationEasing | Animated.EasingFunction | Easing function to use for both opening and closing animation.<br>Opening and closing animations will both use `Easing.out(animationEasing)`. | Easing.quad |
+| extraSpace      | number                  | How much space there should be between the keyboard avoiding element and the keyboard.                                                        | 20          |                                                                            | 20          |
 
 ### `KeyboardAvoiderView` Props
 Supports all React Native `View` props as well as all [common props](#common-props).
