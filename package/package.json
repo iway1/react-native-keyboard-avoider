@@ -33,7 +33,9 @@
     "react-native-uuid": "^2.0.1"
   },
   "dependencies": {
-    "@types/react-native": "^0.69.5",
     "react-native-uuid": "^2.0.1"
+  },
+  "devDependencies": {
+    "@types/react-native": "^0.69.5"
   }
 }
