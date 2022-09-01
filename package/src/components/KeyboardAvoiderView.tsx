@@ -7,6 +7,7 @@ import React, {
 import {
     KeyboardEventListener,
     Platform,
+    ViewProps,
 } from 'react-native'
 import Animated, {
     useAnimatedStyle,
@@ -26,7 +27,7 @@ export default function KeyboardAvoiderView({
     enableAndroid = true,
     avoidMode = 'whole-view',
     ...props
-}: ComponentProps<typeof Animated.View> & CommonProps & {
+}: Animated.AnimateProps<ViewProps> & CommonProps & {
     /**
      * Enable on android. Defaults to true to ensure consistent behavior.
      */
