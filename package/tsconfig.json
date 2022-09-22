@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "emitDeclarationOnly": true,
+        "outDir": "types",
+        "jsx": "react-native",
+        "esModuleInterop": true
+    },
+}
