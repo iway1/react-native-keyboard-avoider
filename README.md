@@ -21,6 +21,17 @@ This library requires `react-native-reanimated`
 
 To install:
 
+### Expo
+```sh
+expo install react-native-reanimated
+```
+
+```sh
+yarn add @good-react-native/keyboard-avoider
+```
+
+### Non-Expo
+
 ```sh
 yarn add @good-react-native/keyboard-avoider react-native-reanimated 
 ```
