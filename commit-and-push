@@ -1,0 +1,5 @@
+tsc -p package/tsconfig.json
+git add .
+read -p "Enter a commit message (no quotes): " commitMessage
+git commit -m "$commitMessage"
+git push
